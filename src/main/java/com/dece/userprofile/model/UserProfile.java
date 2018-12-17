@@ -3,7 +3,7 @@ package com.dece.userprofile.model;
 import java.util.Date;
 import java.util.Objects;
 
-public class Person {
+public class UserProfile {
     private String id;
     private String username;
     private String email;
@@ -72,14 +72,14 @@ public class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(id, person.id) &&
-                Objects.equals(username, person.username) &&
-                Objects.equals(email, person.email) &&
-                Objects.equals(firstName, person.firstName) &&
-                Objects.equals(lastName, person.lastName) &&
-                Objects.equals(creationDate, person.creationDate) &&
-                Objects.equals(lastUpdated, person.lastUpdated);
+        UserProfile userProfile = (UserProfile) o;
+        return Objects.equals(id, userProfile.id) &&
+                Objects.equals(username, userProfile.username) &&
+                Objects.equals(email, userProfile.email) &&
+                Objects.equals(firstName, userProfile.firstName) &&
+                Objects.equals(lastName, userProfile.lastName) &&
+                Objects.equals(creationDate, userProfile.creationDate) &&
+                Objects.equals(lastUpdated, userProfile.lastUpdated);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "UserProfile{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
