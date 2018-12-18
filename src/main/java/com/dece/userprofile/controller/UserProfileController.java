@@ -1,9 +1,11 @@
 package com.dece.userprofile.controller;
 
-import com.dece.userprofile.model.UserProfile;
+import com.dece.userprofile.dto.UserProfileDTO;
+import com.dece.userprofile.service.UserProfileService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/v1/userprofile")
 public class UserProfileController {
+
+    @Autowired
+    UserProfileService userProfileService;
     /**
      * CREATE userprofile.
      *
-     * @param userProfile
+     * @param userProfileDTO
      * @return
      */
     @ApiOperation(value = "Create", nickname = "Create")
@@ -28,18 +33,16 @@ public class UserProfileController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 500, message = "InternalServerError"),
             @ApiResponse(code = 503, message = "Service Unavailable")})
-    public UserProfile createUserProfile(@RequestBody UserProfile userProfile) {
-
-        UserProfile newUserProfile = new UserProfile();
+    public UserProfileDTO createUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
         // save to database here
-        return newUserProfile;
+        return userProfileService.createUserProfile(userProfileDTO);
     }
     /**
      * GET all userprofiles.
      *
      * @return
      */
-    @ApiOperation(value = "Get All", nickname = "Get All")
+    @ApiOperation(value = "GetAll", nickname = "GetAll")
     @GetMapping(value = "/")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
@@ -49,12 +52,12 @@ public class UserProfileController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 500, message = "InternalServerError"),
             @ApiResponse(code = 503, message = "Service Unavailable")})
-    public List<UserProfile> getUserProfiles() {
-        List<UserProfile> userProfileList = new ArrayList<>();
+    public List<UserProfileDTO> getUserProfiles() {
+        List<UserProfileDTO> userProfileDTOList = new ArrayList<>();
         // get from database here
-        UserProfile newUserProfile = new UserProfile();
-        userProfileList.add(newUserProfile);
-        return userProfileList;
+        UserProfileDTO newUserProfileDTO = new UserProfileDTO();
+        userProfileDTOList.add(newUserProfileDTO);
+        return userProfileDTOList;
     }
     /**
      * GET userprofile by Id.
@@ -62,7 +65,7 @@ public class UserProfileController {
      * @param uid
      * @return
      */
-    @ApiOperation(value = "Get by Id", nickname = "Get by Id")
+    @ApiOperation(value = "GetById", nickname = "GetById")
     @GetMapping(value = "/{uid}")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
@@ -73,17 +76,17 @@ public class UserProfileController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 500, message = "InternalServerError"),
             @ApiResponse(code = 503, message = "Service Unavailable")})
-    public UserProfile getUserProfile(@PathVariable String uid) {
+    public UserProfileDTO getUserProfile(@PathVariable String uid) {
 
-        UserProfile userProfile = new UserProfile();
+        UserProfileDTO userProfileDTO = new UserProfileDTO();
         // get from database here
-        return userProfile;
+        return userProfileDTO;
     }
     /**
      * UPDATE existing userprofile.
      *
      * @param uid
-     * @param userProfile
+     * @param userProfileDTO
      * @return
      */
     @ApiOperation(value = "Update", nickname = "Update")
@@ -97,8 +100,8 @@ public class UserProfileController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 500, message = "InternalServerError"),
             @ApiResponse(code = 503, message = "Service Unavailable")})
-    public UserProfile updateUserProfile(@PathVariable String uid, @RequestBody UserProfile userProfile) {
+    public UserProfileDTO updateUserProfile(@PathVariable String uid, @RequestBody UserProfileDTO userProfileDTO) {
         // update object in database here
-        return userProfile;
+        return userProfileDTO;
     }
 }

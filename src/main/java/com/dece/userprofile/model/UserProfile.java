@@ -1,16 +1,38 @@
 package com.dece.userprofile.model;
 
-import java.util.Date;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.Instant;
 
+@Entity
+@Table(name = "UserProfile")
 public class UserProfile {
+    @Id
+    @Column(name = "_Id", nullable = false, unique = true)
     private String id;
+
+    @Column(name = "Username", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "Email", nullable = true)
     private String email;
+
+    @Column(name = "Phone", nullable = true)
+    private String phone;
+
+    @Column(name = "Firstname", nullable = false)
     private String firstName;
+
+    @Column(name = "Lastname", nullable = false)
     private String lastName;
-    private Date creationDate;
-    private Date lastUpdated;
+
+    @Column(name = "CreatedDate", nullable = false)
+    private Instant creationDate;
+
+    @Column(name = "UpdatedDate", nullable = false)
+    private Instant lastUpdated;
 
     public String getId() {
         return id;
@@ -36,6 +58,14 @@ public class UserProfile {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -52,51 +82,19 @@ public class UserProfile {
         this.lastName = lastName;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getLastUpdated() {
+    public Instant getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
+    public void setLastUpdated(Instant lastUpdated) {
         this.lastUpdated = lastUpdated;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserProfile userProfile = (UserProfile) o;
-        return Objects.equals(id, userProfile.id) &&
-                Objects.equals(username, userProfile.username) &&
-                Objects.equals(email, userProfile.email) &&
-                Objects.equals(firstName, userProfile.firstName) &&
-                Objects.equals(lastName, userProfile.lastName) &&
-                Objects.equals(creationDate, userProfile.creationDate) &&
-                Objects.equals(lastUpdated, userProfile.lastUpdated);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, email, firstName, lastName, creationDate, lastUpdated);
-    }
-
-    @Override
-    public String toString() {
-        return "UserProfile{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", creationDate=" + creationDate +
-                ", lastUpdated=" + lastUpdated +
-                '}';
     }
 }

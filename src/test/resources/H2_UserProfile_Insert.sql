@@ -1,0 +1,1 @@
+insert into UserProfile values ('6a0b28cbbdbd0c04973145258a456312', 'jane.doe@email.com', 'jane.doe@email.com', '(281)330-8004', 'Jane', 'Doe', '2018-12-01T00:00:00.000Z', '2018-12-01T00:00:00.000Z');
