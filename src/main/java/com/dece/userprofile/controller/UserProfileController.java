@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -53,11 +52,8 @@ public class UserProfileController {
             @ApiResponse(code = 500, message = "InternalServerError"),
             @ApiResponse(code = 503, message = "Service Unavailable")})
     public List<UserProfileDTO> getUserProfiles() {
-        List<UserProfileDTO> userProfileDTOList = new ArrayList<>();
-        // get from database here
-        UserProfileDTO newUserProfileDTO = new UserProfileDTO();
-        userProfileDTOList.add(newUserProfileDTO);
-        return userProfileDTOList;
+
+        return userProfileService.getAllUserProfiles();
     }
     /**
      * GET userprofile by Id.
@@ -78,9 +74,9 @@ public class UserProfileController {
             @ApiResponse(code = 503, message = "Service Unavailable")})
     public UserProfileDTO getUserProfile(@PathVariable String uid) {
 
-        UserProfileDTO userProfileDTO = new UserProfileDTO();
+
         // get from database here
-        return userProfileDTO;
+        return userProfileService.getUserProfileById(uid);
     }
     /**
      * UPDATE existing userprofile.

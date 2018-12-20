@@ -1,17 +1,15 @@
 package com.dece.userprofile.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import java.time.Instant;
 
 @Entity
 @Table(name = "UserProfile")
 public class UserProfile {
     @Id
-    @Column(name = "_Id", nullable = false, unique = true)
-    private String id;
+    @Column(name = "UserProfileId", nullable = false, unique = true)
+    private String userProfileId;
 
     @Column(name = "Username", nullable = false, unique = true)
     private String username;
@@ -34,12 +32,12 @@ public class UserProfile {
     @Column(name = "UpdatedDate", nullable = false)
     private Instant lastUpdated;
 
-    public String getId() {
-        return id;
+    public String getUserProfileId() {
+        return userProfileId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserProfileId(String userProfileId) {
+        this.userProfileId = userProfileId;
     }
 
     public String getUsername() {
