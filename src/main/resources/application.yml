@@ -4,17 +4,12 @@ server:
 spring:
   datasource:
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    url: jdbc:sqlserver://127.0.0.1:1433;databaseName=userprofile
-    url: jdbc:sqlserver://localhost:1433;databaseName=userprofile
-
+    url: jdbc:sqlserver://localhost:1433;databaseName=master
     username: sa
     password: Deceadmin1!
-    platform: mssql
+    platform: mssqlA
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.SQLServer2012Dialect
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.SQLServer2012Dialect
     show-sql: true

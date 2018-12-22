@@ -1,8 +1,9 @@
 package com.dece.userprofile.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 
 public class UserProfileDTO {
@@ -19,9 +20,11 @@ public class UserProfileDTO {
     @JsonProperty("lastName")
     private String lastName;
     @JsonProperty("creationDate")
-    private Date creationDate;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+    private Instant creationDate;
     @JsonProperty("lastUpdated")
-    private Date lastUpdated;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+    private Instant lastUpdated;
 
     public String getId() {
         return id;
@@ -71,19 +74,19 @@ public class UserProfileDTO {
         this.lastName = lastName;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getLastUpdated() {
+    public Instant getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
+    public void setLastUpdated(Instant lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 

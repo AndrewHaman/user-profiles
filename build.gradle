@@ -12,9 +12,47 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 //apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
+//jacocoTestReport {
+//	reports {
+//		xml.enabled true
+//		html.enabled true
+//	}
+//}
+//
+//jacocoTestCoverageVerification {
+//	violationRules {
+//		rule {
+//			element = 'CLASS'
+//			excludes = ['com.dece.userprofile.configuration.*',
+//						'com.dece.userprofile.dto.*',
+//						'com.dece.userprofile.model.*',
+//						'com.dece.userprofile.UserProfileApplication',
+//						'com.dece.userprofile.UserProfileApplication.*']
+//			limit {
+//				counter = 'BRANCH'
+//				minimum = 0.80
+//			}
+//		}
+//		rule {
+//			element = 'CLASS'
+//			excludes = ['com.dece.userprofile.configuration.*',
+//						'com.dece.userprofile.dto.*',
+//						'com.dece.userprofile.model.*',
+//						'com.dece.userprofile.UserProfileApplication',
+//						'com.dece.userprofile.UserProfileApplication.*']
+//			limit {
+//				minimum = 0.80
+//			}
+//		}
+//	}
+//}
+//
+//jacocoTestCoverageVerification.dependsOn jacocoTestReport
 
 group = 'com.dece'
 version = '0.0.1-SNAPSHOT'
@@ -41,11 +79,9 @@ dependencies {
 	compile('org.modelmapper.extensions:modelmapper-jackson:1.1.0')
 	compile('org.apache.commons:commons-lang3:3.7')
 
-	compile('io.springfox:springfox-swagger2:2.7.0')
-	compile('io.springfox:springfox-swagger-ui:2.7.0')
-
-//	compile('org.hibernate:hibernate-java8:5.3.1.Final')
-
+	compile('io.springfox:springfox-swagger2:2.9.2')
+	compile('io.springfox:springfox-swagger-ui:2.9.2')
+	
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.6'
@@ -57,10 +93,6 @@ dependencies {
 	runtime('org.hsqldb:hsqldb')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-//	testCompile('com.fasterxml.jackson.module: jackson-module-parameter-names')
-//	testCompile('com.fasterxml.jackson.datatype: jackson-datatype-jdk8')
-//	testCompile('com.fasterxml.jackson.datatype: jackson-datatype-jsr310')
 
 	testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
 	testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'

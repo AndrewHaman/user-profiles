@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,11 +27,14 @@ public class UserProfileService {
     @Autowired
     private UserProfileRepository userProfileRepository;
 
+    @Autowired
+    private EntityManager entityManager;
+
     // create
+    @Transactional
     public UserProfileDTO createUserProfile(UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileFactory.convertUserProfileDTOToUserProfile(userProfileDTO);
-        logger.debug("Pretending to make a repository call right now, it's like guaranteed to be 100% successful");
-
+        entityManager.persist(userProfile);
         return userProfileFactory.convertUserProfileToUserProfileDTO(userProfile);
 
     }
@@ -46,19 +51,33 @@ public class UserProfileService {
 
         return userProfileDTOList;
     }
-
+    // get by id
     public UserProfileDTO getUserProfileById(String uid) {
         UserProfile userProfile = userProfileRepository.findByUserProfileId(uid);
-
         if (userProfile == null) {
             logger.debug("No UserProfile found for uid:  {}", uid);
             throw new NoSuchElementException();
         }
-//        userProfile.setUserProfileId(uid);
-
         logger.info("UserProfile Found!   {}", userProfile);
         UserProfileDTO userProfileDTO = userProfileFactory.convertUserProfileToUserProfileDTO(userProfile);
 
         return userProfileDTO;
+    }
+    // update
+    @Transactional
+    public UserProfileDTO updateUserProfile(UserProfileDTO userProfileDTO) {
+        UserProfile userProfile = userProfileRepository.findByUserProfileId(userProfileDTO.getId());
+
+        if (userProfile == null) {
+            logger.debug("No UserProfile found for uid:  {}", userProfileDTO.getId());
+            throw new NoSuchElementException();
+        }
+        // retain original created date
+        userProfileDTO.setCreationDate(userProfile.getCreationDate());
+
+        UserProfile updatedUserProfile = userProfileFactory.convertUserProfileDTOToUserProfile(userProfileDTO);
+        entityManager.merge(updatedUserProfile);
+
+        return userProfileFactory.convertUserProfileToUserProfileDTO(updatedUserProfile);
     }
 }
