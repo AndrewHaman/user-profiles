@@ -7,7 +7,7 @@ spring:
     url: jdbc:sqlserver://localhost:1433;databaseName=master
     username: sa
     password: Deceadmin1!
-    platform: mssqlA
+    platform: mssql
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.SQLServer2012Dialect
